@@ -12,12 +12,12 @@ const Layout = ({ children }) => {
       </li>
       <li className="nav-item">
         <Link to="/signin" className="text-light nav-link">
-          Signin
+          Iniciar Sesión
         </Link>
       </li>
       <li className="nav-item">
         <Link to="/signup" className="text-light nav-link">
-          Registro
+          Registrarse
         </Link>
       </li>
     </ul>

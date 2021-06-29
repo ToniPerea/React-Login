@@ -8,9 +8,9 @@ import 'react-toastify/dist/ReactToastify.min.css'
 
 const Signin = () => {
     const [values, setValues] = useState({
-        email: 'antonio@gmail.com',
-        password: '1234',
-        buttonText: 'Submit'
+        email: '',
+        password: '',
+        buttonText: 'Iniciar Sesión'
     });
 
     const {email,password,buttonText} = values
@@ -22,7 +22,7 @@ const Signin = () => {
 
     const clickSubmit = event => {
         event.preventDefault()
-        setValues({...values, buttonText: 'Registrando'})
+        setValues({...values, buttonText: 'Iniciando'})
         axios({
             method: 'POST',
             url: `${process.env.REACT_APP_API}/signin`,
@@ -32,12 +32,12 @@ const Signin = () => {
             console.log('SIGNIN SUCCESS', response)
 
             // save the response(user,token) localstorage/cookie
-            setValues({...values,name: '',email: '',password: '', buttonText:'Registrado'})
+            setValues({...values,name: '',email: '',password: '', buttonText:'Iniciado'})
             toast.success(`Hey ${response.data.user.name}, Bienvenido!`)
         })
         .catch(error => {
             console.log('SIGNIN ERROR', error.response.data)
-            setValues({...values,buttonText: 'Registrar'})
+            setValues({...values,buttonText: 'Iniciar Sesión'})
             toast.error(error.response.data.error)
         })
     }
@@ -67,7 +67,7 @@ const Signin = () => {
     return (<Layout>
         <div className="col-md-6 offset-md-3">
         <ToastContainer />
-        <h1 className="p-5 text-center">Registro</h1>
+        <h1 className="p-5 text-center">Iniciar Sesión</h1>
         {signinForm()}
         </div>
     </Layout>
