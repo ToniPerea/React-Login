@@ -39,6 +39,17 @@ const Layout = ({ children, match, history }) => {
           <span
             className="nav-link"
             style={{ cursor: "pointer", color: "#fff" }}
+          >
+            {isAuth().name}
+          </span>
+        </li>
+      )}
+
+      {isAuth() && (
+        <li className="nav-item">
+          <span
+            className="nav-link align-right"
+            style={{ cursor: "pointer", color: "#fff" }}
             onClick={() => {
               signout(() => {
                 history.push("/");
@@ -47,12 +58,6 @@ const Layout = ({ children, match, history }) => {
           >
             Cerrar Sesión
           </span>
-        </li>
-      )}
-
-      {isAuth() && (
-        <li className="nav-item">
-          <span className="nav-link">{isAuth().name}</span>
         </li>
       )}
     </ul>
