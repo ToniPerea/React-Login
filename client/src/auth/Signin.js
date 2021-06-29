@@ -7,7 +7,7 @@ import { authenticate, isAuth } from './helpers'
 
 import 'react-toastify/dist/ReactToastify.min.css'
 
-const Signin = () => {
+const Signin = ({history}) => {
     const [values, setValues] = useState({
         email: '',
         password: '',
@@ -35,7 +35,8 @@ const Signin = () => {
             // save the response(user,token) localstorage/cookie
             authenticate(response, () => {
                 setValues({...values,name: '',email: '',password: '', buttonText:'Iniciado'})
-                toast.success(`Hey ${response.data.user.name}, Bienvenido!`)
+                //toast.success(`Hey ${response.data.user.name}, Bienvenido!`)
+                isAuth() && isAuth().role === 'admin' ? history.push('/admin') : history.push('/private');
             })
 
 
