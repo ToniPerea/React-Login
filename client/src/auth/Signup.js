@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { Link, Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import Layout from '../core/Layout'
 import axios from 'axios'
 import {ToastContainer , toast} from 'react-toastify'
@@ -45,17 +45,17 @@ const Signup = () => {
     const signupForm = () => (
         <form>
             <div className="form-group">
-                <lable className="text-mited">Nombre</lable>
+                <label className="text-muted">Nombre</label>
                 <input onChange={handleChange('name')} value={name} type="text" className="form-control" />
             </div>
 
             <div className="form-group">
-                <lable className="text-mited">Email</lable>
+                <label className="text-muted">Email</label>
                 <input onChange={handleChange('email')} value={email} type="email" className="form-control" />
             </div>
 
             <div className="form-group">
-                <lable className="text-mited">Contraseña</lable>
+                <label className="text-muted">Contraseña</label>
                 <input onChange={handleChange('password')} value={password} type="password" className="form-control" />
             </div>
 

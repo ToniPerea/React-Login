@@ -79,7 +79,7 @@ const expressJwt = require('express-jwt');
 
 exports.requireSignin = expressJwt({
   secret: process.env.JWT_SECRET,
-  algorithms: ['RS256']  //req.user
+  algorithms: ['HS256']  //req.user
 })
 
 exports.adminMiddleware = (req, res, next) => {
