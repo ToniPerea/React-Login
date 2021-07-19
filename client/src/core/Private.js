@@ -3,7 +3,7 @@ import { Link, Redirect } from 'react-router-dom'
 import Layout from '../core/Layout'
 import axios from 'axios'
 import {ToastContainer , toast} from 'react-toastify'
-import { isAuth, getCookie, signout} from '../auth/helpers'
+import { isAuth, getCookie, signout, updateUser} from '../auth/helpers'
 
 import 'react-toastify/dist/ReactToastify.min.css'
 
@@ -13,7 +13,7 @@ const Private = ({history}) => {
         name: '',
         email: '',
         password: '',
-        buttonText: 'Registrar'
+        buttonText: 'Enviar'
     });
 
     const token = getCookie('token');
@@ -55,20 +55,25 @@ const Private = ({history}) => {
 
     const clickSubmit = event => {
         event.preventDefault()
-        setValues({...values, buttonText: 'Registrando'})
+        setValues({...values, buttonText: 'Enviando'})
         axios({
-            method: 'POST',
-            url: `${process.env.REACT_APP_API}/signup`,
-            data: {name, email,password}
+            method: 'PUT',
+            url: `${process.env.REACT_APP_API}/user/update`,
+            headers: {
+                Authorization: `Bearer ${token}`
+            },
+            data: {name, password}
         })
         .then(response => {
-            console.log('SIGNUP SUCCESS', response)
-            setValues({...values,name: '',email: '',password: '', buttonText:'Registrado'})
-            toast.success(response.data.message)
+            console.log('PRIVATE PROFILE UPDATE SUCCESS', response)
+            updateUser(response, () => {
+                setValues({...values, buttonText:'Enviado'})
+                toast.success('Perfil actualizado correctamente')
+            })
         })
         .catch(error => {
-            console.log('SIGNUP ERROR', error.response.data)
-            setValues({...values,buttonText: 'Registrar'})
+            console.log('PRIVATE PROFILE UPDATE ERROR', error.response.data.error)
+            setValues({...values,buttonText: 'Enviar'})
             toast.error(error.response.data.error)
         })
     }
